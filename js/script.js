@@ -1,27 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Charger les données du fichier JSON
-    fetch('data/tontine-data.json')
+    const dataUrl = 'data/tontine-data.json';
+
+    fetch(dataUrl)
         .then(response => response.json())
         .then(data => {
             populateTable(data, 'tontine-table');
             populateTable(data, 'admin-table', true);
         });
 
-    // Fonction pour peupler les tables
     function populateTable(data, tableId, isAdmin = false) {
         const tableBody = document.getElementById(tableId).querySelector('tbody');
-        tableBody.innerHTML = ''; // Vider le contenu actuel
+        tableBody.innerHTML = '';
 
         data.forEach(participant => {
             const row = document.createElement('tr');
 
             row.innerHTML = `
                 <td>${participant.nom}</td>
-                <td>${participant.mois1}</td>
-                <td>${participant.mois2}</td>
-                <td>${participant.mois3}</td>
-                <td>${participant.mois4}</td>
-                <td>${participant.mois5}</td>
+                <td>${participant.mois1 || ''}</td>
+                <td>${participant.mois2 || ''}</td>
+                <td>${participant.mois3 || ''}</td>
+                <td>${participant.mois4 || ''}</td>
+                <td>${participant.mois5 || ''}</td>
                 <td>${participant.fondsRecuperes}</td>
             `;
 
@@ -38,30 +38,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Gestion du formulaire d'ajout de participant
     const form = document.getElementById('add-participant-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        const nameInput = document.getElementById('name').value;
 
-        if (nameInput) {
+        const nameInput = document.getElementById('name').value;
+        const selectedMonth = document.getElementById('month').value;
+
+        if (nameInput && selectedMonth) {
             const newParticipant = {
                 nom: nameInput,
-                mois1: "Non Payé",
-                mois2: "Non Payé",
-                mois3: "Non Payé",
-                mois4: "Non Payé",
-                mois5: "Non Payé",
-                fondsRecuperes: "Non"
+                mois1: "",
+                mois2: "",
+                mois3: "",
+                mois4: "",
+                mois5: "",
+                fondsRecuperes: "NON"
             };
 
-            // Ici, vous ajouteriez le participant aux données JSON (localement pour cette démo)
-            // puis rechargeriez les tables. Dans une application réelle, vous devriez mettre à jour
-            // les données sur le serveur.
+            newParticipant[selectedMonth] = "20000";
 
-            alert(`Le participant ${nameInput} a été ajouté.`);
+            // Ici, vous devriez sauvegarder le nouveau participant dans un fichier JSON ou une base de données
+            // Pour cette démo, on l'ajoute simplement au tableau existant
+            fetch(dataUrl)
+                .then(response => response.json())
+                .then(data => {
+                    data.push(newParticipant);
+                    populateTable(data, 'admin-table', true);
+                    populateTable(data, 'tontine-table');
+                });
+
+            alert(`Le participant ${nameInput} a été ajouté avec un paiement de 20000 F pour ${selectedMonth}.`);
         }
     });
-
-    // Gestion des boutons Éditer et Supprimer (non fonctionnel dans cet exemple)
 });

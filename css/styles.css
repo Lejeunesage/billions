@@ -1,16 +1,30 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
     text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.5em;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin-bottom: 20px;
+    font-size: 0.9em;
 }
 
 th, td {
@@ -20,7 +34,8 @@ th, td {
 }
 
 th {
-    background-color: #f4f4f4;
+    background-color: #0a3d74;
+    color: #fff;
 }
 
 tr:nth-child(even) {
@@ -28,23 +43,48 @@ tr:nth-child(even) {
 }
 
 form {
-    margin: 20px 0;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-form input {
-    padding: 5px;
-    margin-right: 10px;
+form input, form select, form button {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-button {
-    padding: 5px 10px;
-    background-color: #4CAF50;
+form button {
+    background-color: #28a745;
     color: white;
-    border: none;
     cursor: pointer;
+    border: none;
 }
 
-button:hover {
-    background-color: #45a049;
+form button:hover {
+    background-color: #218838;
+}
+
+/* Styles pour les petits écrans */
+@media (max-width: 600px) {
+    table, th, td {
+        font-size: 0.8em;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    form input, form select, form button {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
 }

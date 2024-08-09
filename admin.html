@@ -7,11 +7,22 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+<div class="container">
     <h2>Administration de la Tontine</h2>
+
     <form id="add-participant-form">
         <label for="name">Nom du participant:</label>
         <input type="text" id="name" required>
-        <button type="submit">Ajouter le participant</button>
+        <label for="month">Mois:</label>
+        <select id="month">
+            <option value="mois1">Mois 1</option>
+            <option value="mois2">Mois 2</option>
+            <option value="mois3">Mois 3</option>
+            <option value="mois4">Mois 4</option>
+            <option value="mois5">Mois 5</option>
+        </select>
+        <button type="submit">Ajouter le paiement</button>
     </form>
 
     <table id="admin-table">
@@ -31,7 +42,8 @@
             <!-- Les données seront insérées ici par JavaScript -->
         </tbody>
     </table>
+</div>
 
-    <script src="js/script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
